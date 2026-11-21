@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebSync-Aviato | Executive Aerospace Sourcing & Co-Brokerage</title>
+
+    <!-- Google Fonts: Syne for display, Inter for body, JetBrains Mono for telemetry/data -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        obsidian: '#05070B',
+                        slateCard: '#0D121B',
+                        slateBorder: 'rgba(255, 255, 255, 0.08)',
+                        goldAccent: '#D4AF37',
+                        goldLight: '#F0D078',
+                        goldDark: '#AA7C11',
+                        titanium: '#F5F7FA',
+                        silverText: '#94A3B8'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Syne', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom scrollbar and luxury visual depth */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #05070B;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1e293b;
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #D4AF37;
+        }
+
+        .gold-glow {
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.15);
+        }
+        .gold-glow-lg {
+            box-shadow: 0 0 45px rgba(212, 175, 55, 0.25);
+        }
+        .gold-border-glow:hover {
+            border-color: rgba(212, 175, 55, 0.5);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+        }
+
+        .text-gradient-gold {
+            background: linear-gradient(135deg, #F0D078 0%, #D4AF37 50%, #997519 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .bg-gradient-gold {
+            background: linear-gradient(135deg, #F0D078 0%, #D4AF37 50%, #AA7C11 100%);
+        }
+
+        .bg-gradient-dark-card {
+            background: linear-gradient(180deg, rgba(13, 18, 27, 0.9) 0%, rgba(8, 12, 19, 0.95) 100%);
+        }
+
+        /* Subtle grid background pattern */
+        .bg-grid-pattern {
+            background-size: 40px 40px;
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+        }
+    </style>
+</head>
+<body class="bg-obsidian text-titanium font-sans selection:bg-goldAccent selection:text-obsidian antialiased overflow-x-hidden">
+
+    <!-- Canvas Header Background Animation -->
+    <div class="fixed inset-0 pointer-events-none z-0 opacity-40">
+        <canvas id="heroCanvas" class="w-full h-full"></canvas>
+    </div>
+
+    <!-- Navigation Header -->
+    <header class="sticky top-0 z-50 backdrop-blur-xl bg-obsidian/80 border-b border-white/10 transition-all duration-300">
+        <div class="max-w-7xl mx-mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            
+            <!-- Logo -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-lg bg-slateCard border border-goldAccent/40 flex items-center justify-content-center p-2 group-hover:border-goldAccent transition-colors">
+                    <!-- Custom SVG Wings Emblem -->
+                    <svg viewBox="0 0 100 100" class="w-full h-full text-goldAccent fill-current">
+                        <path d="M50 15 L85 65 L65 65 L50 40 L35 65 L15 65 Z" />
+                        <path d="M50 70 L75 85 L25 85 Z" opacity="0.7" />
+                    </svg>
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-display font-bold text-lg sm:text-xl tracking-wider text-titanium flex items-center gap-1">
+                        WebSync<span class="text-gradient-gold">-Aviato</span>
+                    </span>
+                    <span class="font-mono text-[9px] tracking-widest text-silverText uppercase -mt-1">Aerospace Sourcing & Co-Brokerage</span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-silverText">
+                <a href="#inventory" class="hover:text-goldLight transition-colors">Active Mandates</a>
+                <a href="#capabilities" class="hover:text-goldLight transition-colors">Capabilities</a>
+                <a href="#process" class="hover:text-goldLight transition-colors">Process</a>
+                <a href="#leadership" class="hover:text-goldLight transition-colors">Leadership</a>
+                <a href="#deal-desk" class="hover:text-goldLight transition-colors">Deal Desk</a>
+            </nav>
+
+            <!-- CTA & Mobile Toggle -->
+            <div class="flex items-center gap-4">
+                <a href="#deal-desk" class="hidden sm:inline-flex items-center justify-center px-5 py-2.5 rounded-full bg-gradient-gold text-obsidian font-semibold text-xs tracking-wider uppercase hover:opacity-90 transition-all transform hover:-translate-y-0.5 gold-glow">
+                    Initiate Mandate
+                </a>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobileMenuBtn" aria-label="Toggle Menu" class="md:hidden p-2 rounded-lg bg-slateCard border border-white/10 text-titanium hover:text-goldAccent">
+                    <svg id="menuIcon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Drawer -->
+        <div id="mobileDrawer" class="hidden md:hidden bg-slateCard/95 border-b border-white/10 px-6 py-6 transition-all">
+            <div class="flex flex-col gap-4 text-base font-medium text-silverText">
+                <a href="#inventory" class="mobile-link hover:text-goldAccent py-1">Active Mandates</a>
+                <a href="#capabilities" class="mobile-link hover:text-goldAccent py-1">Capabilities</a>
+                <a href="#process" class="mobile-link hover:text-goldAccent py-1">Process</a>
+                <a href="#leadership" class="mobile-link hover:text-goldAccent py-1">Leadership</a>
+                <a href="#deal-desk" class="mobile-link hover:text-goldAccent py-1">Deal Desk</a>
+                <a href="#deal-desk" class="mobile-link mt-2 text-center py-3 rounded-xl bg-gradient-gold text-obsidian font-bold text-xs uppercase tracking-wider">Initiate Mandate</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="relative z-10">
+        
+        <!-- Hero Section -->
+        <section class="relative min-h-[calc(100vh-80px)] flex flex-col justify-between pt-12 pb-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+            <div class="my-auto py-12 max-w-4xl">
+                <!-- Status Badge -->
+                <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-slateCard border border-goldAccent/30 mb-8 gold-glow">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                    <span class="font-mono text-xs font-semibold tracking-wider text-goldLight uppercase">GLOBAL OFF-MARKET SOURCING • ACTIVE</span>
+                </div>
+
+                <!-- Main Title -->
+                <h1 class="font-display font-extrabold text-4xl sm:text-6xl lg:text-7xl tracking-tight leading-[1.08] text-titanium mb-6">
+                    Precision Aircraft Sourcing & <span class="text-gradient-gold">Global Co-Brokerage.</span>
+                </h1>
+
+                <!-- Subheadline -->
+                <p class="text-lg sm:text-xl text-silverText max-w-2xl font-light leading-relaxed mb-10">
+                    WebSync-Aviato bridges the gap between flight academies, private buyers, and global inventory holders. We structure off-market acquisitions, multi-engine piston allocations, and vetted co-brokerage mandates with absolute transparency.
+                </p>
+
+                <!-- Dual Action CTAs -->
+                <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
+                    <a href="#inventory" class="px-8 py-4 rounded-xl bg-gradient-gold text-obsidian font-bold text-sm uppercase tracking-wider text-center hover:shadow-lg transition-all hover:opacity-95 gold-glow">
+                        Explore Active Mandates
+                    </a>
+                    <a href="#deal-desk" class="px-8 py-4 rounded-xl bg-slateCard border border-white/15 text-titanium font-semibold text-sm uppercase tracking-wider text-center hover:bg-white/5 hover:border-goldAccent/50 transition-all">
+                        Partner / Co-Broker With Us
+                    </a>
+                </div>
+            </div>
+
+            <!-- Aerospace Telemetry Data Strip -->
+            <div class="w-full pt-8 border-t border-white/10 grid grid-cols-2 md:grid-cols-4 gap-6 font-mono text-xs">
+                <div class="bg-slateCard/60 border border-white/5 rounded-lg p-3">
+                    <span class="text-silverText/60 block mb-1">GLOBAL COVERAGE</span>
+                    <span class="text-titanium font-semibold">US • EU • MENA • ZA</span>
+                </div>
+                <div class="bg-slateCard/60 border border-white/5 rounded-lg p-3">
+                    <span class="text-silverText/60 block mb-1">CORE FLEET FOCUS</span>
+                    <span class="text-titanium font-semibold">Trainers & Turboprops</span>
+                </div>
+                <div class="bg-slateCard/60 border border-white/5 rounded-lg p-3">
+                    <span class="text-silverText/60 block mb-1">SECURITY STANDARD</span>
+                    <span class="text-titanium font-semibold">100% Escrow-Backed</span>
+                </div>
+                <div class="bg-slateCard/60 border border-white/5 rounded-lg p-3">
+                    <span class="text-silverText/60 block mb-1">DEAL DESK SLA</span>
+                    <span class="text-goldLight font-semibold">&lt; 4 Hours Response</span>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Active Inventory & Mandates Showcase -->
+        <section id="inventory" class="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto bg-grid-pattern">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+                <div>
+                    <div class="font-mono text-xs font-bold text-goldAccent uppercase tracking-widest mb-2">// FLEET INVENTORY & OFF-MARKET MANDATES</div>
+                    <h2 class="font-display font-bold text-3xl sm:text-5xl text-titanium">Featured Aircraft Portfolio</h2>
+                </div>
+
+                <!-- Inventory Filter Tabs -->
+                <div class="flex flex-wrap gap-2 bg-slateCard/80 p-1.5 rounded-xl border border-white/10 text-xs font-medium font-mono" id="inventoryFilters">
+                    <button data-filter="all" class="filter-btn active px-4 py-2 rounded-lg bg-goldAccent text-obsidian font-bold transition-all">ALL AIRCRAFT</button>
+                    <button data-filter="multi-engine" class="filter-btn px-4 py-2 rounded-lg text-silverText hover:text-titanium transition-all">MULTI-ENGINE</button>
+                    <button data-filter="trainer" class="filter-btn px-4 py-2 rounded-lg text-silverText hover:text-titanium transition-all">TRAINERS</button>
+                    <button data-filter="turboprop" class="filter-btn px-4 py-2 rounded-lg text-silverText hover:text-titanium transition-all">TURBOPROPS</button>
+                    <button data-filter="jet" class="filter-btn px-4 py-2 rounded-lg text-silverText hover:text-titanium transition-all">JETS</button>
+                </div>
+            </div>
+
+            <!-- Aircraft Cards Grid -->
+            <div id="aircraftGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Dynamically populated via JavaScript using SITE_CONFIG.aircraftInventory -->
+            </div>
+        </section>
+
+
+        <!-- Capabilities & Global Sourcing Architecture -->
+        <section id="capabilities" class="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-white/10">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <div class="font-mono text-xs font-bold text-goldAccent uppercase tracking-widest mb-2">// CAPABILITIES</div>
+                <h2 class="font-display font-bold text-3xl sm:text-5xl text-titanium mb-4">Precision Aerospace Architecture</h2>
+                <p class="text-silverText text-base sm:text-lg font-light">Whether expanding an ATO flight academy fleet or sourcing hard-to-find multi-engine twin pistons, WebSync-Aviato deploys structured sourcing methodology.</p>
+            </div>
+
+            <!-- 3-Column Bento Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Capability 1 -->
+                <div class="bg-slateCard/80 border border-white/10 rounded-2xl p-8 hover:border-goldAccent/40 transition-all gold-border-glow flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-goldAccent/10 border border-goldAccent/30 flex items-center justify-center text-goldAccent mb-6 font-mono text-lg font-bold">01</div>
+                        <h3 class="font-display font-bold text-xl text-titanium mb-3">Off-Market Fleet Intelligence</h3>
+                        <p class="text-silverText text-sm leading-relaxed mb-6">Direct access to unlisted airframes across regional registries. We track low-hour trainers, multi-engine twins, and turboprops prior to public listing.</p>
+                    </div>
+                    <ul class="font-mono text-xs text-silverText/80 space-y-2 border-t border-white/5 pt-4">
+                        <li class="flex items-center gap-2"><span class="text-goldAccent">✓</span> Logbook Verification</li>
+                        <li class="flex items-center gap-2"><span class="text-goldAccent">✓</span> Title & Lien Clearance</li>
+                        <li class="flex items-center gap-2"><span class="text-goldAccent">✓</span> Direct Owner Access</li>
+                    </ul>
+                </div>
+
+                <!-- Capability 2 -->
+                <div class="bg-slateCard/80 border border-goldAccent/30 rounded-2xl p-8 transition-all gold-glow flex flex-col justify-between relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-goldAccent text-obsidian font-mono text-[10px] font-bold px-3 py-1 rounded-bl-lg uppercase">CORE FOCUS</div>
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-goldAccent/20 border border-goldAccent flex items-center justify-center text-goldLight mb-6 font-mono text-lg font-bold">02</div>
+                        <h3 class="font-display font-bold text-xl text-titanium mb-3">Dedicated Co-Brokerage Execution</h3>
+                        <p class="text-silverText text-sm leading-relaxed mb-6">We partner seamlessly with international aviation brokers, offering pre-agreed commission splits and non-circumvention security for co-marketed mandates.</p>
+                    </div>
+                    <ul class="font-mono text-xs text-silverText/80 space-y-2 border-t border-white/5 pt-4">
+                        <li class="flex items-center gap-2"><span class="text-goldAccent">✓</span> Written NCNDA Protocol</li>
+                        <li class="flex items-center gap-2"><span class="text-goldAccent">✓</span> Joint Seller Mandates</li>
+                        <li class="flex items-center gap-2"><span class="text-goldAccent">✓</span> Fast-Track Escrow Close</li>
+                    </ul>
+                </div>
+
+                <!-- Capability 3 -->
+                <div class="bg-slateCard/80 border border-white/10 rounded-2xl p-8 hover:border-goldAccent/40 transition-all gold-border-glow flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-goldAccent/10 border border-goldAccent/30 flex items-center justify-center text-goldAccent mb-6 font-mono text-lg font-bold">03</div>
+                        <h3 class="font-display font-bold text-xl text-titanium mb-3">Flight Academy Fleet Expansion</h3>
+                        <p class="text-silverText text-sm leading-relaxed mb-6">Specialized pipeline for flight training organizations seeking standardized fleets (C172, PA-28, PA-34 Seneca) with consistent maintenance histories.</p>
+                    </div>
+                    <ul class="font-mono text-xs text-silverText/80 space-y-2 border-t border-white/5 pt-4">
+                        <li class="flex items-center gap-2"><span class="text-goldAccent">✓</span> Multi-Unit Acquisitions</li>
+                        <li class="flex items-center gap-2"><span class="text-goldAccent">✓</span> Ferry Flight Logistics</li>
+                        <li class="flex items-center gap-2"><span class="text-goldAccent">✓</span> ATO Avionics Alignment</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- 4-Stage Acquisition Protocol -->
+        <section id="process" class="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-white/10 bg-slateCard/30 rounded-3xl my-12">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <div class="font-mono text-xs font-bold text-goldAccent uppercase tracking-widest mb-2">// TRANSACTION PROTOCOL</div>
+                <h2 class="font-display font-bold text-3xl sm:text-5xl text-titanium">The 4-Stage Sourcing Workflow</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 relative">
+                <!-- Step 1 -->
+                <div class="p-6 rounded-xl bg-slateCard border border-white/10 flex flex-col justify-between">
+                    <div>
+                        <span class="font-mono text-xs text-goldAccent font-bold tracking-widest">STAGE 01</span>
+                        <h4 class="font-display font-bold text-lg text-titanium mt-2 mb-2">Mandate & Spec Lock</h4>
+                        <p class="text-silverText text-xs leading-relaxed">We outline budget, airframe hour limits, engine TBO requirements, and target delivery windows under formal retainer or exclusive sourcing agreement.</p>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="p-6 rounded-xl bg-slateCard border border-white/10 flex flex-col justify-between">
+                    <div>
+                        <span class="font-mono text-xs text-goldAccent font-bold tracking-widest">STAGE 02</span>
+                        <h4 class="font-display font-bold text-lg text-titanium mt-2 mb-2">Global Sourcing</h4>
+                        <p class="text-silverText text-xs leading-relaxed">We query off-market fleets, co-broker channels, and regional registries, filtering candidate aircraft against rigorous mechanical standards.</p>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="p-6 rounded-xl bg-slateCard border border-white/10 flex flex-col justify-between">
+                    <div>
+                        <span class="font-mono text-xs text-goldAccent font-bold tracking-widest">STAGE 03</span>
+                        <h4 class="font-display font-bold text-lg text-titanium mt-2 mb-2">Pre-Buy & Audit</h4>
+                        <p class="text-silverText text-xs leading-relaxed">Independent A&P/IA logbook audit, damage history verification, AD compliance check, and physical pre-purchase inspection management.</p>
+                    </div>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="p-6 rounded-xl bg-slateCard border border-goldAccent/40 flex flex-col justify-between bg-goldAccent/5">
+                    <div>
+                        <span class="font-mono text-xs text-goldLight font-bold tracking-widest">STAGE 04</span>
+                        <h4 class="font-display font-bold text-lg text-titanium mt-2 mb-2">Escrow & Delivery</h4>
+                        <p class="text-silverText text-xs leading-relaxed">Secure escrow funding via Insured Aviation Escrow Services, title registration, ferry pilot assignment, and final bill of sale delivery.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Leadership & Founding Partners Section -->
+        <section id="leadership" class="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-white/10">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <div class="font-mono text-xs font-bold text-goldAccent uppercase tracking-widest mb-2">// EXECUTIVE LEADERSHIP</div>
+                <h2 class="font-display font-bold text-3xl sm:text-5xl text-titanium mb-4">Founding Partners</h2>
+                <p class="text-silverText text-base font-light">Combining aerospace deal structure, technical valuation, co-broker alliances, and flight academy fleet expansion capabilities.</p>
+            </div>
+
+            <!-- 4 Column Leadership Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                
+                <!-- Partner 1: Khizer Jahangir Khan -->
+                <div class="bg-slateCard/90 border border-goldAccent/40 rounded-2xl p-6 flex flex-col items-center text-center hover:border-goldAccent transition-all gold-border-glow group">
+                    <div class="w-20 h-20 rounded-2xl bg-gradient-to-br from-goldAccent/20 to-obsidian border-2 border-goldAccent flex items-center justify-center font-display font-bold text-2xl text-goldLight mb-5 group-hover:scale-105 transition-transform">
+                        KJK
+                    </div>
+                    <span class="font-mono text-[10px] uppercase font-bold text-goldAccent tracking-widest bg-goldAccent/10 px-2.5 py-1 rounded-full mb-2">Founder & Managing Partner</span>
+                    <h3 class="font-display font-bold text-xl text-titanium mb-2">Khizer Jahangir Khan</h3>
+                    <p class="text-silverText text-xs leading-relaxed font-light mt-2">
+                        Leading strategic acquisitions, high-tier deal architecture, global partner relationships, and executive mandates worldwide.
+                    </p>
+                </div>
+
+                <!-- Partner 2: Taha Amir Hashmi -->
+                <div class="bg-slateCard/90 border border-white/10 rounded-2xl p-6 flex flex-col items-center text-center hover:border-goldAccent/40 transition-all gold-border-glow group">
+                    <div class="w-20 h-20 rounded-2xl bg-gradient-to-br from-white/10 to-obsidian border border-white/20 flex items-center justify-center font-display font-bold text-2xl text-titanium mb-5 group-hover:scale-105 transition-transform">
+                        TAH
+                    </div>
+                    <span class="font-mono text-[10px] uppercase font-bold text-silverText tracking-widest bg-white/5 px-2.5 py-1 rounded-full mb-2">Founding Partner</span>
+                    <h3 class="font-display font-bold text-xl text-titanium mb-2">Taha Amir Hashmi</h3>
+                    <p class="text-silverText text-xs leading-relaxed font-light mt-2">
+                        Spearheading fleet intelligence, technical airframe valuation, avionics evaluation, and market data analytics.
+                    </p>
+                </div>
+
+                <!-- Partner 3: Raja Abdul Samad -->
+                <div class="bg-slateCard/90 border border-white/10 rounded-2xl p-6 flex flex-col items-center text-center hover:border-goldAccent/40 transition-all gold-border-glow group">
+                    <div class="w-20 h-20 rounded-2xl bg-gradient-to-br from-white/10 to-obsidian border border-white/20 flex items-center justify-center font-display font-bold text-2xl text-titanium mb-5 group-hover:scale-105 transition-transform">
+                        RAS
+                    </div>
+                    <span class="font-mono text-[10px] uppercase font-bold text-silverText tracking-widest bg-white/5 px-2.5 py-1 rounded-full mb-2">Founding Partner</span>
+                    <h3 class="font-display font-bold text-xl text-titanium mb-2">Raja Abdul Samad</h3>
+                    <p class="text-silverText text-xs leading-relaxed font-light mt-2">
+                        Overseeing co-brokerage alliances, seller mandate coordination, non-circumvention agreements, and escrow management.
+                    </p>
+                </div>
+
+                <!-- Partner 4: Hesham Mohammad -->
+                <div class="bg-slateCard/90 border border-white/10 rounded-2xl p-6 flex flex-col items-center text-center hover:border-goldAccent/40 transition-all gold-border-glow group">
+                    <div class="w-20 h-20 rounded-2xl bg-gradient-to-br from-white/10 to-obsidian border border-white/20 flex items-center justify-center font-display font-bold text-2xl text-titanium mb-5 group-hover:scale-105 transition-transform">
+                        HM
+                    </div>
+                    <span class="font-mono text-[10px] uppercase font-bold text-silverText tracking-widest bg-white/5 px-2.5 py-1 rounded-full mb-2">Founding Partner</span>
+                    <h3 class="font-display font-bold text-xl text-titanium mb-2">Hesham Mohammad</h3>
+                    <p class="text-silverText text-xs leading-relaxed font-light mt-2">
+                        Directing client acquisitions, flight academy fleet expansion programs, international outreach, and buyer relations.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Dual-Mode Interactive Deal Desk (Contact Section) -->
+        <section id="deal-desk" class="py-24 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto border-t border-white/10">
+            <div class="bg-gradient-dark-card border border-white/15 rounded-3xl p-6 sm:p-12 gold-glow-lg">
+                <div class="text-center max-w-2xl mx-auto mb-10">
+                    <div class="font-mono text-xs font-bold text-goldAccent uppercase tracking-widest mb-2">// DIRECT ACCESS</div>
+                    <h2 class="font-display font-bold text-3xl sm:text-4xl text-titanium mb-3">Initiate WebSync-Aviato Deal Desk</h2>
+                    <p class="text-silverText text-sm font-light">Select your track below to generate an immediate mandate brief or establish co-brokerage terms.</p>
+                </div>
+
+                <!-- Mode Switch Tabs -->
+                <div class="flex justify-center mb-8">
+                    <div class="bg-obsidian border border-white/10 p-1 rounded-xl flex gap-2 font-mono text-xs">
+                        <button id="tabBuyer" class="px-6 py-2.5 rounded-lg bg-goldAccent text-obsidian font-bold transition-all">
+                            BUYER / FLEET ACQUISITION
+                        </button>
+                        <button id="tabBroker" class="px-6 py-2.5 rounded-lg text-silverText hover:text-titanium font-bold transition-all">
+                            AIRCRAFT BROKER (CO-BROKERAGE)
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Form Fields -->
+                <form id="dealDeskForm" onsubmit="event.preventDefault();" class="space-y-6">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block font-mono text-xs text-silverText mb-2 uppercase">Full Name / Entity *</label>
+                            <input type="text" id="formName" required placeholder="Captain / Aviation LLC" class="w-full bg-obsidian/80 border border-white/15 rounded-xl px-4 py-3 text-titanium text-sm focus:border-goldAccent focus:outline-none transition-colors">
+                        </div>
+                        <div>
+                            <label class="block font-mono text-xs text-silverText mb-2 uppercase">Direct Email Address *</label>
+                            <input type="email" id="formEmail" required placeholder="executive@fleet.com" class="w-full bg-obsidian/80 border border-white/15 rounded-xl px-4 py-3 text-titanium text-sm focus:border-goldAccent focus:outline-none transition-colors">
+                        </div>
+                    </div>
+
+                    <!-- Dynamic Fields Container -->
+                    <div id="dynamicFields" class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <!-- Default: Buyer Fields -->
+                        <div>
+                            <label class="block font-mono text-xs text-silverText mb-2 uppercase">Target Model / Fleet Specs</label>
+                            <input type="text" id="formSpec" placeholder="e.g. Piper Seneca III / C172 G1000" class="w-full bg-obsidian/80 border border-white/15 rounded-xl px-4 py-3 text-titanium text-sm focus:border-goldAccent focus:outline-none transition-colors">
+                        </div>
+                        <div>
+                            <label class="block font-mono text-xs text-silverText mb-2 uppercase">Target Budget Range (USD)</label>
+                            <input type="text" id="formBudget" placeholder="e.g. $250,000 - $600,000" class="w-full bg-obsidian/80 border border-white/15 rounded-xl px-4 py-3 text-titanium text-sm focus:border-goldAccent focus:outline-none transition-colors">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block font-mono text-xs text-silverText mb-2 uppercase">Mandate Context / Notes</label>
+                        <textarea id="formNotes" rows="4" placeholder="Specify timeline, preferred registration, TTAF limits, or co-broker agreement terms..." class="w-full bg-obsidian/80 border border-white/15 rounded-xl px-4 py-3 text-titanium text-sm focus:border-goldAccent focus:outline-none transition-colors"></textarea>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="flex flex-col sm:flex-row items-center gap-4 pt-4">
+                        <button type="button" id="btnLaunchEmail" class="w-full sm:w-1/2 py-4 rounded-xl bg-gradient-gold text-obsidian font-bold text-xs uppercase tracking-wider hover:opacity-90 transition-all gold-glow flex items-center justify-center gap-2">
+                            <span>✉ Launch Pre-Filled Email</span>
+                        </button>
+                        <button type="button" id="btnCopyBrief" class="w-full sm:w-1/2 py-4 rounded-xl bg-slateCard border border-white/20 text-titanium font-semibold text-xs uppercase tracking-wider hover:bg-white/5 transition-all flex items-center justify-center gap-2">
+                            <span>📋 Copy Inquiry Brief</span>
+                        </button>
+                    </div>
+
+                    <div class="text-center pt-2">
+                        <a id="btnWhatsappDesk" href="#" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 font-mono text-xs text-emerald-400 hover:underline">
+                            <span>💬 Direct WhatsApp Executive Desk</span>
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Modal for Spec Dossier Request -->
+    <div id="dossierModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-obsidian/90 backdrop-blur-md transition-opacity">
+        <div class="bg-slateCard border border-goldAccent/40 rounded-3xl max-w-lg w-full p-6 sm:p-8 relative gold-glow-lg">
+            <button id="closeModal" class="absolute top-5 right-5 text-silverText hover:text-titanium text-xl font-bold">✕</button>
+            
+            <div class="font-mono text-xs text-goldAccent font-bold uppercase mb-1">// SPECIFICATION DOSSIER</div>
+            <h3 id="modalAircraftTitle" class="font-display font-bold text-2xl text-titanium mb-2">Piper Seneca III</h3>
+            <p id="modalAircraftMeta" class="font-mono text-xs text-silverText mb-6">PA-34-220T • N-Registered • TTAF: 3,450 hrs</p>
+
+            <div class="bg-obsidian p-4 rounded-xl border border-white/10 font-mono text-xs space-y-2 mb-6">
+                <div class="flex justify-between"><span class="text-silverText">Asking Price:</span><span id="modalPrice" class="text-goldLight font-bold">$285,000 USD</span></div>
+                <div class="flex justify-between"><span class="text-silverText">Engine SMOH:</span><span id="modalSMOH" class="text-titanium">520 L / 520 R</span></div>
+                <div class="flex justify-between"><span class="text-silverText">Availability:</span><span id="modalStatus" class="text-emerald-400">Off-Market Mandate</span></div>
+            </div>
+
+            <p class="text-xs text-silverText mb-6">Clicking below will prepare your formal inquiry to WebSync-Aviato with pre-attached tail specs.</p>
+
+            <div class="flex flex-col gap-3">
+                <button id="modalEmailBtn" class="w-full py-3.5 rounded-xl bg-gradient-gold text-obsidian font-bold text-xs uppercase tracking-wider hover:opacity-90 transition-all gold-glow">
+                    Send Mailto Request
+                </button>
+                <button id="modalCopyBtn" class="w-full py-3.5 rounded-xl bg-obsidian border border-white/15 text-titanium font-semibold text-xs uppercase tracking-wider hover:bg-white/5 transition-all">
+                    Copy Dossier Request Text
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toastNotification" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 bg-goldAccent text-obsidian px-6 py-3 rounded-xl font-mono text-xs font-bold shadow-2xl flex items-center gap-2">
+        <span>✓</span> <span id="toastMessage">Copied to clipboard!</span>
+    </div>
+
+    <!-- Minimal Executive Footer -->
+    <footer class="bg-obsidian border-t border-white/10 py-12 px-4 sm:px-6 lg:px-8 relative z-10 font-mono text-xs text-silverText">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex items-center gap-3">
+                <div class="w-7 h-7 rounded bg-slateCard border border-goldAccent/40 flex items-center justify-center p-1">
+                    <svg viewBox="0 0 100 100" class="w-full h-full text-goldAccent fill-current">
+                        <path d="M50 15 L85 65 L65 65 L50 40 L35 65 L15 65 Z" />
+                    </svg>
+                </div>
+                <span class="font-display font-bold text-titanium text-sm">WebSync<span class="text-goldAccent">-Aviato</span></span>
+            </div>
+
+            <div class="text-center md:text-left max-w-xl text-[11px] leading-relaxed opacity-70">
+                All transactions executed exclusively via licensed aviation escrow agents. Independent aircraft sourcing, multi-engine fleet acquisitions, and co-brokerage advisory.
+            </div>
+
+            <div>
+                &copy; 2026 WebSync-Aviato. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- JavaScript Core & SITE_CONFIG -->
+    <script>
+        /**
+         * Site Configuration Object for WebSync-Aviato
+         * Easily update listings, contact details, or email target without changing HTML layout
+         */
+        const SITE_CONFIG = {
+            companyName: "WebSync-Aviato",
+            contactEmail: "acquisitions@websync-aviato.com",
+            whatsappNumber: "+15550192834",
+            hqLabel: "Dallas | Geneva | Dubai | Singapore",
+            aircraftInventory: [
+                {
+                    id: "PA34-SIII",
+                    category: "multi-engine",
+                    badge: "Co-Broker Mandate",
+                    yearModel: "1982 Piper Seneca III",
+                    subModel: "PA-34-220T Twin Engine",
+                    location: "EU Registry • Ferried Worldwide",
+                    ttaf: "3,450 hrs TTAF",
+                    smoh: "520 L / 520 R SMOH",
+                    price: "$285,000 USD",
+                    image: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=800&q=80",
+                    featured: true
+                },
+                {
+                    id: "PA34-SV",
+                    category: "multi-engine",
+                    badge: "Off-Market Sourcing",
+                    yearModel: "2007 Piper Seneca V",
+                    subModel: "PA-34-220T • Garmin G1000",
+                    location: "US Registry • N-Number",
+                    ttaf: "1,980 hrs TTAF",
+                    smoh: "410 L / 410 R SMOH",
+                    price: "$595,000 USD",
+                    image: "https://images.unsplash.com/photo-1519074069444-1ba4e6988899?auto=format&fit=crop&w=800&q=80",
+                    featured: false
+                },
+                {
+                    id: "C172S-NXI",
+                    category: "trainer",
+                    badge: "Flight Academy Special",
+                    yearModel: "2018 Cessna 172S Skyhawk SP",
+                    subModel: "Garmin G1000 NXi • Synthetic Vision",
+                    location: "US Flight Academy Fleet",
+                    ttaf: "2,100 hrs TTAF",
+                    smoh: "250 hrs SMOH",
+                    price: "$440,000 USD",
+                    image: "https://images.unsplash.com/photo-1508614589041-895b88991e3e?auto=format&fit=crop&w=800&q=80",
+                    featured: false
+                },
+                {
+                    id: "PA28-TX",
+                    category: "trainer",
+                    badge: "Exclusive Mandate",
+                    yearModel: "2014 Piper PA-28-181 Archer TX",
+                    subModel: "Garmin G500 • ATO Maintenance Log",
+                    location: "ZA Registry • Complete Logs",
+                    ttaf: "1,850 hrs TTAF",
+                    smoh: "620 hrs SMOH",
+                    price: "$295,000 USD",
+                    image: "https://images.unsplash.com/photo-1520437358207-323b43b57529?auto=format&fit=crop&w=800&q=80",
+                    featured: false
+                },
+                {
+                    id: "BC-C90GTX",
+                    category: "turboprop",
+                    badge: "Co-Broker Mandate",
+                    yearModel: "2015 Beechcraft King Air C90GTx",
+                    subModel: "Collins Pro Line 21 • Swept Turboprop",
+                    location: "MENA Region • Executive Hangar",
+                    ttaf: "1,620 hrs TTAF",
+                    smoh: "Fresh Hot Section (HSI)",
+                    price: "$2,650,000 USD",
+                    image: "https://images.unsplash.com/photo-1559687123-a551d8d67d33?auto=format&fit=crop&w=800&q=80",
+                    featured: false
+                },
+                {
+                    id: "CJ3-PLUS",
+                    category: "jet",
+                    badge: "Off-Market Executive",
+                    yearModel: "2019 Cessna Citation CJ3+",
+                    subModel: "Garmin G3000 • TAP Blue Engine Program",
+                    location: "Geneva Hangar • Single Owner",
+                    ttaf: "1,150 hrs TTAF",
+                    smoh: "Fully Enrolled TAP Blue",
+                    price: "$8,900,000 USD",
+                    image: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=800&q=80",
+                    featured: false
+                }
+            ]
+        };
+
+        // Render Inventory Cards Dynamic Function with Fallback Image support
+        function renderInventory(filterCategory = 'all') {
+            const grid = document.getElementById('aircraftGrid');
+            grid.innerHTML = '';
+
+            const items = filterCategory === 'all' 
+                ? SITE_CONFIG.aircraftInventory 
+                : SITE_CONFIG.aircraftInventory.filter(item => item.category === filterCategory);
+
+            items.forEach(item => {
+                const card = document.createElement('div');
+                card.className = "bg-slateCard/90 border border-white/10 rounded-2xl overflow-hidden hover:border-goldAccent/50 transition-all duration-300 gold-border-glow flex flex-col justify-between group";
+                
+                card.innerHTML = `
+                    <div>
+                        <!-- Image Container with Dark Gradient Overlay -->
+                        <div class="relative h-48 w-full overflow-hidden bg-obsidian">
+                            <img src="${item.image}" alt="${item.yearModel}" 
+                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80"
+                                 onerror="this.onerror=null; this.src='https://placehold.co/800x450/0D121B/D4AF37?text=${encodeURIComponent(item.yearModel)}';">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slateCard via-transparent to-black/30"></div>
+                            
+                            <!-- Badge -->
+                            <div class="absolute top-3 right-3 bg-obsidian/80 backdrop-blur-md border border-goldAccent/40 px-3 py-1 rounded-full text-[10px] font-mono font-bold text-goldLight tracking-wider uppercase">
+                                ${item.badge}
+                            </div>
+                        </div>
+
+                        <!-- Card Content -->
+                        <div class="p-6">
+                            <div class="font-mono text-[10px] text-silverText/70 uppercase tracking-widest mb-1">${item.location}</div>
+                            <h3 class="font-display font-bold text-xl text-titanium mb-1">${item.yearModel}</h3>
+                            <p class="text-xs font-mono text-silverText mb-4">${item.subModel}</p>
+
+                            <!-- Specs Grid -->
+                            <div class="grid grid-cols-2 gap-2 bg-obsidian/70 border border-white/5 p-3 rounded-xl font-mono text-xs mb-4">
+                                <div>
+                                    <span class="text-silverText/60 text-[10px] block">AIRFRAME</span>
+                                    <span class="text-titanium font-semibold">${item.ttaf}</span>
+                                </div>
+                                <div>
+                                    <span class="text-silverText/60 text-[10px] block">ENGINE TBO/SMOH</span>
+                                    <span class="text-titanium font-semibold">${item.smoh}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Footer / Price / Action -->
+                    <div class="px-6 pb-6 pt-0 flex items-center justify-between border-t border-white/5 mt-2 pt-4">
+                        <div>
+                            <span class="text-silverText text-[10px] font-mono block">ASKING PRICE</span>
+                            <span class="font-mono font-bold text-lg text-goldLight">${item.price}</span>
+                        </div>
+                        <button onclick="openDossierModal('${item.id}')" class="px-4 py-2 rounded-lg bg-goldAccent/10 border border-goldAccent/40 text-goldLight font-mono text-xs font-bold hover:bg-gradient-gold hover:text-obsidian transition-all">
+                            Request Spec
+                        </button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // Filtering Logic
+        document.querySelectorAll('#inventoryFilters button').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                document.querySelectorAll('#inventoryFilters button').forEach(b => {
+                    b.classList.remove('bg-goldAccent', 'text-obsidian', 'font-bold');
+                    b.classList.add('text-silverText');
+                });
+                e.target.classList.add('bg-goldAccent', 'text-obsidian', 'font-bold');
+                e.target.classList.remove('text-silverText');
+
+                const filter = e.target.getAttribute('data-filter');
+                renderInventory(filter);
+            });
+        });
+
+        // Modal Functionality
+        let currentModalAircraft = null;
+
+        function openDossierModal(aircraftId) {
+            const item = SITE_CONFIG.aircraftInventory.find(a => a.id === aircraftId);
+            if (!item) return;
+
+            currentModalAircraft = item;
+            document.getElementById('modalAircraftTitle').innerText = item.yearModel;
+            document.getElementById('modalAircraftMeta').innerText = `${item.subModel} • ${item.location}`;
+            document.getElementById('modalPrice').innerText = item.price;
+            document.getElementById('modalSMOH').innerText = item.smoh;
+            document.getElementById('modalStatus').innerText = item.badge;
+
+            document.getElementById('dossierModal').classList.remove('hidden');
+        }
+
+        document.getElementById('closeModal').addEventListener('click', () => {
+            document.getElementById('dossierModal').classList.add('hidden');
+        });
+
+        document.getElementById('modalEmailBtn').addEventListener('click', () => {
+            if (!currentModalAircraft) return;
+            const subject = encodeURIComponent(`[Spec Request] ${currentModalAircraft.yearModel} (${currentModalAircraft.id})`);
+            const body = encodeURIComponent(`Hello WebSync-Aviato Team,\n\nI am requesting full logbook summaries, avionics spec sheet, and co-brokerage pricing terms for the following aircraft:\n\nModel: ${currentModalAircraft.yearModel}\nSubModel: ${currentModalAircraft.subModel}\nLocation: ${currentModalAircraft.location}\nTTAF: ${currentModalAircraft.ttaf}\nAsking Price: ${currentModalAircraft.price}\n\nPlease reply with the official PDF dossier.\n\nBest regards,`);
+            window.location.href = `mailto:${SITE_CONFIG.contactEmail}?subject=${subject}&body=${body}`;
+        });
+
+        document.getElementById('modalCopyBtn').addEventListener('click', () => {
+            if (!currentModalAircraft) return;
+            const text = `WebSync-Aviato Spec Request\nAircraft: ${currentModalAircraft.yearModel}\nTTAF: ${currentModalAircraft.ttaf}\nPrice: ${currentModalAircraft.price}\nLocation: ${currentModalAircraft.location}\nTarget Email: ${SITE_CONFIG.contactEmail}`;
+            copyToClipboard(text);
+        });
+
+        // Deal Desk Switcher (Buyer vs Broker)
+        let currentMode = 'buyer';
+
+        const tabBuyer = document.getElementById('tabBuyer');
+        const tabBroker = document.getElementById('tabBroker');
+        const dynamicFields = document.getElementById('dynamicFields');
+
+        tabBuyer.addEventListener('click', () => {
+            currentMode = 'buyer';
+            tabBuyer.className = "px-6 py-2.5 rounded-lg bg-goldAccent text-obsidian font-bold transition-all";
+            tabBroker.className = "px-6 py-2.5 rounded-lg text-silverText hover:text-titanium font-bold transition-all";
+            
+            dynamicFields.innerHTML = `
+                <div>
+                    <label class="block font-mono text-xs text-silverText mb-2 uppercase">Target Model / Fleet Specs</label>
+                    <input type="text" id="formSpec" placeholder="e.g. Piper Seneca III / C172 G1000" class="w-full bg-obsidian/80 border border-white/15 rounded-xl px-4 py-3 text-titanium text-sm focus:border-goldAccent focus:outline-none transition-colors">
+                </div>
+                <div>
+                    <label class="block font-mono text-xs text-silverText mb-2 uppercase">Target Budget Range (USD)</label>
+                    <input type="text" id="formBudget" placeholder="e.g. $250,000 - $600,000" class="w-full bg-obsidian/80 border border-white/15 rounded-xl px-4 py-3 text-titanium text-sm focus:border-goldAccent focus:outline-none transition-colors">
+                </div>
+            `;
+        });
+
+        tabBroker.addEventListener('click', () => {
+            currentMode = 'broker';
+            tabBroker.className = "px-6 py-2.5 rounded-lg bg-goldAccent text-obsidian font-bold transition-all";
+            tabBuyer.className = "px-6 py-2.5 rounded-lg text-silverText hover:text-titanium font-bold transition-all";
+
+            dynamicFields.innerHTML = `
+                <div>
+                    <label class="block font-mono text-xs text-silverText mb-2 uppercase">Listing Model & Registration/Location</label>
+                    <input type="text" id="formSpec" placeholder="e.g. 1982 Seneca III • N-Reg / EU Hangar" class="w-full bg-obsidian/80 border border-white/15 rounded-xl px-4 py-3 text-titanium text-sm focus:border-goldAccent focus:outline-none transition-colors">
+                </div>
+                <div>
+                    <label class="block font-mono text-xs text-silverText mb-2 uppercase">Proposed Co-Brokerage Split / Mandate</label>
+                    <input type="text" id="formBudget" placeholder="e.g. 50/50 Commission Split • Exclusive Mandate" class="w-full bg-obsidian/80 border border-white/15 rounded-xl px-4 py-3 text-titanium text-sm focus:border-goldAccent focus:outline-none transition-colors">
+                </div>
+            `;
+        });
+
+        // Launch Email from Deal Desk
+        document.getElementById('btnLaunchEmail').addEventListener('click', () => {
+            const name = document.getElementById('formName').value || 'Client';
+            const email = document.getElementById('formEmail').value || 'Not provided';
+            const spec = document.getElementById('formSpec') ? document.getElementById('formSpec').value : 'Unspecified';
+            const budgetOrSplit = document.getElementById('formBudget') ? document.getElementById('formBudget').value : 'Unspecified';
+            const notes = document.getElementById('formNotes').value || 'None';
+
+            const subject = encodeURIComponent(`[${currentMode.toUpperCase()} MANDATE BRIEF] ${name} - ${spec}`);
+            const body = encodeURIComponent(`WebSync-Aviato Deal Desk Mandate Brief\n\nMode: ${currentMode.toUpperCase()}\nName/Entity: ${name}\nEmail: ${email}\nAircraft Specs / Listing: ${spec}\nBudget / Split Terms: ${budgetOrSplit}\nNotes: ${notes}\n\nSubmitted via WebSync-Aviato Portal`);
+            
+            window.location.href = `mailto:${SITE_CONFIG.contactEmail}?subject=${subject}&body=${body}`;
+        });
+
+        // Copy Inquiry Brief to Clipboard
+        document.getElementById('btnCopyBrief').addEventListener('click', () => {
+            const name = document.getElementById('formName').value || 'Client';
+            const email = document.getElementById('formEmail').value || 'Not provided';
+            const spec = document.getElementById('formSpec') ? document.getElementById('formSpec').value : 'Unspecified';
+            const budgetOrSplit = document.getElementById('formBudget') ? document.getElementById('formBudget').value : 'Unspecified';
+            const notes = document.getElementById('formNotes').value || 'None';
+
+            const brief = `WEBSYNC-AVIATO MANDATE BRIEF\n==============================\nMode: ${currentMode.toUpperCase()}\nEntity: ${name}\nContact: ${email}\nSpecs/Listing: ${spec}\nBudget/Split: ${budgetOrSplit}\nNotes: ${notes}\nTarget Contact: ${SITE_CONFIG.contactEmail}`;
+
+            copyToClipboard(brief);
+        });
+
+        // Copy Helper with Fallback and Toast Trigger
+        function copyToClipboard(text) {
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(text).then(() => showToast()).catch(() => execCopyFallback(text));
+            } else {
+                execCopyFallback(text);
+            }
+        }
+
+        function execCopyFallback(text) {
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+            textArea.style.position = "fixed";
+            textArea.style.left = "-999999px";
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            try {
+                document.execCommand('copy');
+                showToast();
+            } catch (err) {
+                showToast("Could not copy automatically. Please select text manually.");
+            }
+            document.body.removeChild(textArea);
+        }
+
+        function showToast(msg = "Copied brief to clipboard!") {
+            const toast = document.getElementById('toastNotification');
+            document.getElementById('toastMessage').innerText = msg;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+
+        // WhatsApp Link Config setup
+        document.getElementById('btnWhatsappDesk').href = `https://wa.me/${SITE_CONFIG.whatsappNumber.replace(/[^0-9]/g, '')}?text=${encodeURIComponent('Hello WebSync-Aviato Team, I would like to inquire regarding an aircraft mandate.')}`;
+
+        // Mobile Navigation Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileDrawer = document.getElementById('mobileDrawer');
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileDrawer.classList.toggle('hidden');
+        });
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => mobileDrawer.classList.add('hidden'));
+        });
+
+        // Background Hero Canvas (Aerospace Telemetry Arcs & Nodes Animation)
+        const canvas = document.getElementById('heroCanvas');
+        const ctx = canvas.getContext('2d');
+
+        let width = canvas.width = window.innerWidth;
+        let height = canvas.height = window.innerHeight;
+
+        window.addEventListener('resize', () => {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        });
+
+        const nodes = Array.from({ length: 30 }, () => ({
+            x: Math.random() * width,
+            y: Math.random() * height,
+            vx: (Math.random() - 0.5) * 0.4,
+            vy: (Math.random() - 0.5) * 0.4,
+            radius: Math.random() * 2 + 1
+        }));
+
+        function animateCanvas() {
+            ctx.clearRect(0, 0, width, height);
+
+            // Draw nodes
+            ctx.fillStyle = 'rgba(212, 175, 55, 0.4)';
+            nodes.forEach(node => {
+                node.x += node.vx;
+                node.y += node.vy;
+
+                if (node.x < 0 || node.x > width) node.vx *= -1;
+                if (node.y < 0 || node.y > height) node.vy *= -1;
+
+                ctx.beginPath();
+                ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
+                ctx.fill();
+            });
+
+            // Draw flight-path vectors between close nodes
+            for (let i = 0; i < nodes.length; i++) {
+                for (let j = i + 1; j < nodes.length; j++) {
+                    const dx = nodes[i].x - nodes[j].x;
+                    const dy = nodes[i].y - nodes[j].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+
+                    if (dist < 180) {
+                        ctx.strokeStyle = `rgba(212, 175, 55, ${0.15 * (1 - dist / 180)})`;
+                        ctx.lineWidth = 0.8;
+                        ctx.beginPath();
+                        ctx.moveTo(nodes[i].x, nodes[i].y);
+                        ctx.lineTo(nodes[j].x, nodes[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+
+            requestAnimationFrame(animateCanvas);
+        }
+
+        // Initialize App on Window Load
+        window.onload = function() {
+            renderInventory('all');
+            animateCanvas();
+        };
+    </script>
+</body>
+</html>
